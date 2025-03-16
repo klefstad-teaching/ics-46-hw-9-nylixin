@@ -123,7 +123,7 @@ void print_path(const vector<int>& v, int total)
     // if there's nothing in v we can't print a path
     if (v.empty())
     {
-        cout << "Empty Path" << endl;
+        cout << endl << "Total cost is " << total << endl;
         return;
     }
 
