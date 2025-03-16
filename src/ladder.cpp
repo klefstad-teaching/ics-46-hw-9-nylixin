@@ -204,17 +204,18 @@ void print_word_ladder(const vector<string>& ladder)
     // if the ladder is empty we won't have anything to print
     if (ladder.empty())
     {
-        cout << "There are no words in this ladder." << endl;
+        cout << "No word ladder found.\n" << endl;
         return;
     }
 
+    cout << "Word ladder found: ";
     // prints a word, then the -> size for every word,
     // unles it's the last word
     size_t ladder_size = ladder.size();
     for (size_t i = 0; i < ladder_size; i++)
     {
         cout << ladder[i];
-        if (i < ladder_size - 1) { cout << "->";}
+        if (i < ladder_size - 1) { cout << " ";}
     }
     cout << endl;
 }

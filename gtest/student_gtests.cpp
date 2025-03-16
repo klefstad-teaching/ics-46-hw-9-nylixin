@@ -78,11 +78,11 @@ TEST(ladder, printLadder)
 
   vector<string> ladder = {"hi", "my", "words"};
   print_word_ladder(ladder);
-
+  
   cout.rdbuf(old_cout);
   string output = out.str();
 
-  EXPECT_NE(output.find("hi->my->words"), string::npos);
+  EXPECT_NE(output.find("hi my words"), string::npos);
 }
 
 /*
@@ -153,7 +153,7 @@ TEST(dijkstra, print)
   print_path(test, 1);
 
   cout.rdbuf(coutBuf);
-  EXPECT_EQ(out.str(), "0 1 2\nTotal cost is 1\n");
+  EXPECT_EQ(out.str(), "0 1 2 \nTotal cost is 1\n");
 }
 
 TEST(dijkstra, print_one)
@@ -165,7 +165,7 @@ TEST(dijkstra, print_one)
   print_path(test, 0);
 
   cout.rdbuf(coutBuf);
-  EXPECT_EQ(out.str(), "0\nTotal cost is 0\n");
+  EXPECT_EQ(out.str(), "0 \nTotal cost is 0\n");
 }
 
 TEST(dijkstra, print_empty)
