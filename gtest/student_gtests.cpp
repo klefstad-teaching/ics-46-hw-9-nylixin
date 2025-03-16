@@ -54,6 +54,15 @@ TEST(ladder, generateWordLadderReturnsExpected)
   EXPECT_EQ(ladder, true_ladder);
 }
 
+TEST(ladder, generateWordLadderReturnsExpectedShorter)
+{
+  set<string> my_words = {"orcange", "orchnge", "orchage", "orchare", "orchard"};
+  vector<string> ladder = generate_word_ladder("orange", "orchard", my_words);
+  vector<string> true_ladder = {"orange", "orcange", "orchnge", "orchage", "orchare", "orchard"};
+
+  EXPECT_EQ(ladder, true_ladder);
+}
+
 TEST(ladder, lw)
 {
   set<string> word_list;
@@ -72,7 +81,7 @@ TEST(ladder, printLadder)
 
   cout.rdbuf(old_cout);
   string output = out.str();
-  
+
   EXPECT_NE(output.find("hi->my->words"), string::npos);
 }
 
