@@ -204,7 +204,7 @@ void print_word_ladder(const vector<string>& ladder)
     // if the ladder is empty we won't have anything to print
     if (ladder.empty())
     {
-        cout << "No word ladder found.\n" << endl;
+        cout << "No word ladder found." << endl;
         return;
     }
 
