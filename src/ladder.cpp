@@ -132,7 +132,6 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
         // finding words that are adjacent
         for (const string& word : word_list)
-        //for (const string& word : generate_adjacent(last_word, word_list))
         {
             if (is_adjacent(last_word, word) && visited.find(word) == visited.end())
             {
