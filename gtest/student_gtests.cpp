@@ -93,3 +93,94 @@ DONE vector<string> generate_word_ladder(const string& begin_word, const string&
 DONE void load_words(set<string> & word_list, const string& file_name);
 DONE void print_word_ladder(const vector<string>& ladder);
 */
+
+TEST(dijkstra, shortest_path)
+{
+  // TEST BASED OFF OF small.txt
+  Graph G;
+  G.numVertices = 4;
+  G.resize(4);
+
+  G[0].push_back({0, 3, 1});
+  G[3].push_back({3, 1, 2});
+  G[1].push_back({1, 2, 3});
+
+  vector<int> previous;
+  vector<int> distances = dijkstra_shortest_path(G, 0, previous);
+
+  EXPECT_EQ(distances[0], 0);
+  EXPECT_EQ(distances[3], 1);
+  EXPECT_EQ(distances[1], 3);
+  EXPECT_EQ(distances[2], 6);
+
+  EXPECT_EQ(previous[0], -1);
+  EXPECT_EQ(previous[3], 0);
+  EXPECT_EQ(previous[1], 3);
+  EXPECT_EQ(previous[2], 1);
+}
+
+// 0 -> 1 -> 2
+TEST(dijkstra, extract_shortest_two)
+{
+  vector<int> prev = {-1, 0, 1};
+  vector<int> testt = extract_shortest_path({}, prev, 2);
+
+  EXPECT_EQ(testt, (vector<int>{0, 1, 2}));
+}
+
+TEST(dijkstra, extract_shortest_one)
+{
+  vector<int> prev = {-1, 0, 1};
+  vector<int> testt = extract_shortest_path({}, prev, 1);
+
+  EXPECT_EQ(testt, (vector<int>{0, 1}));
+}
+
+TEST(dijkstra, extract_shortest_empty)
+{
+  vector<int> prev = {-1, 0, -1};
+  vector<int> testt = extract_shortest_path({}, prev, 2);
+
+  EXPECT_TRUE(testt.empty());
+}
+
+TEST(dijkstra, print)
+{
+  ostringstream out;
+  streambuf* coutBuf = cout.rdbuf(out.rdbuf());
+
+  vector<int> test = {0, 1, 2};
+  print_path(test, 1);
+
+  cout.rdbuf(coutBuf);
+  EXPECT_EQ(out.str(), "0 1 2\nTotal cost is 1\n");
+}
+
+TEST(dijkstra, print_one)
+{
+  ostringstream out;
+  streambuf* coutBuf = cout.rdbuf(out.rdbuf());
+
+  vector<int> test = {0};
+  print_path(test, 0);
+
+  cout.rdbuf(coutBuf);
+  EXPECT_EQ(out.str(), "0\nTotal cost is 0\n");
+}
+
+TEST(dijkstra, print_empty)
+{
+  ostringstream out;
+  streambuf* coutBuf = cout.rdbuf(out.rdbuf());
+
+  vector<int> test = {};
+  print_path(test, -1);
+
+  cout.rdbuf(coutBuf);
+  EXPECT_EQ(out.str(), "Empty Path\n");
+}
+
+
+// DONE vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous);
+// DONE vector<int> extract_shortest_path(const vector<int>& /*distances*/, const vector<int>& previous, int destination);
+// DONE void print_path(const vector<int>& v, int total);
